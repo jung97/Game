@@ -1,3 +1,99 @@
+button {
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.Game {
+  display: flex;
+  flex-direction: column;
+  background: url("img/background.png") center/cover;
+  width: 800px;
+  height: 500px;
+  border-radius: 5%;
+  margin: auto;
+}
+
+.Game__header {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  align-items: center;
+}
+
+.Game__field {
+  width: 100%;
+  height: 100%;
+  margin-top: 40px;
+  opacity: 0.4;
+}
+.pop-up {
+  display: block;
+  width: 400px;
+  height: 120px;
+  padding: 20px;
+  background-color: #00000090;
+  color: white;
+  text-align: center;
+  margin: auto;
+  transform: translateY(-150%);
+  border-radius: 20px;
+}
+
+.pop-up--hide {
+  display: none;
+}
+
+.pop-up__refresh {
+  width: 60px;
+  height: 60px;
+  font-size: 24px;
+  background-color: wheat;
+  border: 2px solid black;
+  border-radius: 50%;
+}
+
+.pop-up__message {
+  display: block;
+  font-size: 38px;
+}
+
+.Game__button {
+  width: 60px;
+  height: 60px;
+  background-color: wheat;
+  border: 4px solid black;
+  font-size: 24px;
+  transition: transform 300ms ease-in;
+}
+
+.Game__timer {
+  width: 100px;
+  background-color: white;
+  text-align: center;
+  border: 5px solid black;
+  font-size: 32px;
+  margin-top: 8px;
+  border-radius: 20px;
+}
+
+.Game__score {
+  text-align: center;
+  width: 50px;
+  height: 50px;
+  margin-top: 8px;
+  font-size: 35px;
+  border: 3px solid black;
+  background-color: darksalmon;
+  border-radius: 50%;
+  color: white;
+}
+
+.Game__button:hover {
+  transform: scale(1.1);
+}
+
 body {
+  text-align: center;
   background-color: black;
 }
