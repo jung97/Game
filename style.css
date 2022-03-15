@@ -75,6 +75,7 @@ button {
   font-size: 32px;
   margin-top: 8px;
   border-radius: 20px;
+  visibility: hidden;
 }
 
 .Game__score {
@@ -87,6 +88,7 @@ button {
   background-color: darksalmon;
   border-radius: 50%;
   color: white;
+  visibility: hidden;
 }
 
 .Game__button:hover {

@@ -1,12 +1,53 @@
+'use strict';
+
 const field = document.querySelector('.Game__field');
 const fieldRect = field.getBoundingClientRect();
+const GameBtn = document.querySelector('.Game__button');
+const GameTimer = document.querySelector('.Game__timer');
+const GameScore = document.querySelector('.Game__score');
+
 const Carrot__Size = 80;
+const Carrot__count = 6;
+const Bug__count = 6;
+
+let started = false;
+let score = 0;
+let timer = undefined;
+
+GameBtn.addEventListener('click', () => {
+  if (started) {
+    stopGame();
+  } else {
+    startGame();
+  }
+  started = !started;
+}); 
+
+function startGame() {
+    initGame();
+    showStopButton();
+    showTimerAndScroe();
+}
+
+function stopGame() {}
+
+function showStopButton() {
+    const icon = GameBtn.querySelector('.fa-solid');
+    icon.classList.add('fa-stop');
+    icon.classList.remove('fa-play');
+}
+
+function showTimerAndScroe() {
+    GameTimer.style.visibility = 'visible';
+    GameScore.style.visibility = 'visible';
+}
 
 function initGame() {
-    // 벌레와 당근 생성 후 필드에 추가
-    console.log(fieldRect);
-    additem('carrot', 6, 'img/carrot.png');
-    additem('bug', 6, 'img/bug.png');
+    field.innerHTML = '';
+    GameScore.innerText = Carrot__count;
+    // 벌레와 당근 생성 후 필드에 추가  
+    additem('carrot', Carrot__count, 'img/carrot.png');
+    additem('bug', Bug__count, 'img/bug.png');
 }
 
 function additem(className, count, imgPath) {
@@ -31,4 +72,4 @@ function randomNumber(min, max) {
     return Math.random() * (max - min) + min;
 }
 
-initGame();
+
