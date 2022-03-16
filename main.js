@@ -6,9 +6,11 @@ const GameBtn = document.querySelector('.Game__button');
 const GameTimer = document.querySelector('.Game__timer');
 const GameScore = document.querySelector('.Game__score');
 
+
 const Carrot__Size = 80;
 const Carrot__count = 6;
 const Bug__count = 6;
+const Game_Duration_SEC = 5;
 
 let started = false;
 let score = 0;
@@ -27,9 +29,35 @@ function startGame() {
     initGame();
     showStopButton();
     showTimerAndScroe();
+    startGameTimer();
 }
 
-function stopGame() {}
+function stopGameTimer() {
+    clearInterval(timer);
+}
+
+function startGameTimer() {
+    let remainingTimeSec = Game_Duration_SEC;
+    updateTimerText(remainingTimeSec);
+    timer = setInterval(()=>{
+        if(remainingTimeSec <= 0) {
+            clearInterval(timer);
+            return;
+        }
+        updateTimerText(--remainingTimeSec);
+    },1000);
+}
+
+function updateTimerText(time) {
+    const minutes = Math.floor(time/ 60);
+    const seconds = time % 60;
+    GameTimer.innerHTML = `${minutes}:${seconds}`;
+}
+
+
+function stopGame() {
+    stopGameTimer();
+}
 
 function showStopButton() {
     const icon = GameBtn.querySelector('.fa-solid');
