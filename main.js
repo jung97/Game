@@ -6,6 +6,9 @@ const GameBtn = document.querySelector('.Game__button');
 const GameTimer = document.querySelector('.Game__timer');
 const GameScore = document.querySelector('.Game__score');
 
+const popup = document.querySelector('.pop-up');
+const popuptext = document.querySelector('.pop-up__message');
+const popuprefresh = document.querySelector('.pop-up__refresh');
 
 const Carrot__Size = 80;
 const Carrot__count = 6;
@@ -57,6 +60,8 @@ function updateTimerText(time) {
 
 function stopGame() {
     stopGameTimer();
+    hideGameButton();
+    showPopupWithText('Replay😎');
 }
 
 function showStopButton() {
@@ -65,9 +70,18 @@ function showStopButton() {
     icon.classList.remove('fa-play');
 }
 
+function hideGameButton() {
+    GameBtn.style.visibility = 'hidden';
+}
+
 function showTimerAndScroe() {
     GameTimer.style.visibility = 'visible';
     GameScore.style.visibility = 'visible';
+}
+
+function showPopupWithText(text) {
+    popuptext.innerText = text;
+    popup.classList.remove('pop-up--hide');
 }
 
 function initGame() {
@@ -99,5 +113,3 @@ function additem(className, count, imgPath) {
 function randomNumber(min, max) {
     return Math.random() * (max - min) + min;
 }
-
-

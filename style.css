@@ -29,9 +29,9 @@ button {
 }
 .pop-up {
   display: block;
-  width: 400px;
-  height: 120px;
-  padding: 20px;
+  width: 300px;
+  height: 150px;
+  padding: 16px;
   background-color: #00000090;
   color: white;
   text-align: center;
