@@ -19,20 +19,39 @@ let started = false;
 let score = 0;
 let timer = undefined;
 
+field.addEventListener('click',onFieldClick);
 GameBtn.addEventListener('click', () => {
   if (started) {
     stopGame();
   } else {
     startGame();
   }
-  started = !started;
 }); 
 
+popuprefresh.addEventListener('click', ()=> {
+    startGame();
+    hidePopup();
+})
+
 function startGame() {
+    started = true;
     initGame();
     showStopButton();
     showTimerAndScroe();
     startGameTimer();
+}
+
+function stopGame() {
+    started = false;
+    stopGameTimer();
+    hideGameButton();
+    showPopupWithText('Replay😎');
+}
+
+function finishGame(win) {
+    started = false;
+    hideGameButton();
+    showPopupWithText(win? 'YOU WON😍' : 'YOU LOST👿');
 }
 
 function stopGameTimer() {
@@ -45,6 +64,7 @@ function startGameTimer() {
     timer = setInterval(()=>{
         if(remainingTimeSec <= 0) {
             clearInterval(timer);
+            finishGame(Carrot__count === score);
             return;
         }
         updateTimerText(--remainingTimeSec);
@@ -55,13 +75,6 @@ function updateTimerText(time) {
     const minutes = Math.floor(time/ 60);
     const seconds = time % 60;
     GameTimer.innerHTML = `${minutes}:${seconds}`;
-}
-
-
-function stopGame() {
-    stopGameTimer();
-    hideGameButton();
-    showPopupWithText('Replay😎');
 }
 
 function showStopButton() {
@@ -84,12 +97,39 @@ function showPopupWithText(text) {
     popup.classList.remove('pop-up--hide');
 }
 
+function hidePopup() {
+    popup.classList.add('pop-up--hide');
+}
+
 function initGame() {
     field.innerHTML = '';
     GameScore.innerText = Carrot__count;
     // 벌레와 당근 생성 후 필드에 추가  
     additem('carrot', Carrot__count, 'img/carrot.png');
     additem('bug', Bug__count, 'img/bug.png');
+}
+
+function onFieldClick(event) {
+    if (!started) {
+        return;
+    }
+    const target = event.target;
+    if(target.matches('.carrot')) {
+    // 당근!!
+    target.remove();
+    score++;
+    updateScoreBoard();
+    if(score === Carrot__count) {
+        finishGame(true);
+    }
+    } else if (target.matches('.bug')) {
+    stopGameTimer();
+    finishGame(false);
+    } 
+}
+
+function updateScoreBoard() {
+    GameScore.innerText = Carrot__count - score;    
 }
 
 function additem(className, count, imgPath) {
