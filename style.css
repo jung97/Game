@@ -76,6 +76,8 @@ button {
   margin-top: 8px;
   border-radius: 20px;
   visibility: hidden;
+  user-select: none;
+  cursor: auto;
 }
 
 .Game__score {
@@ -98,4 +100,14 @@ button {
 body {
   text-align: center;
   background-color: black;
+}
+
+.carrot,
+.bug {
+  transition: transform 100ms ease-in;
+}
+
+.carrot:hover,
+.bug:hover {
+  transform: scale(1.1);
 }
