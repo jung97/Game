@@ -1,7 +1,34 @@
 import Field from './field.js';
 import * as sound from './sound.js';
 
-export default class Game {
+
+// 빌더 패턴 -> 오브젝트를 간단명료하게 읽기, 가독성 이 좋게 만듦
+export default class GameBuilder {
+  gameduration(duration) {
+    this.gameduration = duration;
+    return this;
+  }
+
+  carrotCount(num) {
+    this.carrotCount = num;
+    return this;
+  }
+
+  bugCount(num) {
+    this.bugCount = num;
+    return this;
+  }
+
+  build() {
+    return new Game(
+        this.gameduration,
+        this.carrotCount,
+        this.bugCount
+    );
+  }
+}
+
+class Game {
   constructor(gameduration, carrotCount, bugCount) {
     this.gameduration = gameduration;
     this.carrotCount = carrotCount;
@@ -65,12 +92,12 @@ export default class Game {
     if (!this.started) {
         return;
     }
-    if(item === 'carrot') {
+    if (item === 'carrot') {
       this.score++;
       this.updateScoreBoard();
     if(this.score === this.carrotCount) {
       this.finish(true);
-    }
+      }
     } else if (item ==='bug') {
       this.finish(false);
     } 
@@ -97,7 +124,7 @@ export default class Game {
     this.timer = setInterval(()=>{
       if(remainingTimeSec <= 0) {
         learInterval(this.timer);
-        this.finish(carrotCount=== score);
+        this.finish(this.carrotCount=== this.score);
         return;
       }
       this.updateTimerText(--remainingTimeSec);
