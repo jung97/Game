@@ -1,3 +1,5 @@
+'use strict';
+
 const carrotSound = new Audio('./sound/carrot_pull.mp3');
 const alertSound = new Audio('./sound/alert.wav');
 const bgSound = new Audio('./sound/bg.mp3');
@@ -25,7 +27,7 @@ export function playBackground() {
 }
 
 export function stopBackground() {
-    stopSound(bgSound);
+    bgSound.pause();
 }
 
 
@@ -34,6 +36,3 @@ function playsound(sound) {
     sound.play();
 }
 
-function stopSound(sound) {
-    sound.pause();
-}
